@@ -141,7 +141,7 @@ public class BrokerStartup {
             }
 
             MixAll.properties2Object(ServerUtil.commandLine2Properties(commandLine), brokerConfig);
-            brokerConfig.setRocketmqHome("E:\\yuanma\\rocketmq-master");
+            brokerConfig.setRocketmqHome("/Users/mr.softrock/Documents/Mr.SoftRock/yuanma/rocketmq/");
             if (null == brokerConfig.getRocketmqHome()) {
                 System.out.printf("Please set the %s variable in your environment to match the location of the RocketMQ installation", MixAll.ROCKETMQ_HOME_ENV);
                 System.exit(-2);
