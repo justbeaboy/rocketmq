@@ -32,7 +32,7 @@ public class Producer {
          * Instantiate with a producer group name.
          */
         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
-        producer.setNamesrvAddr("10.1.45.40:9876");
+        producer.setNamesrvAddr("127.0.0.1:9876");
         /*
          * Specify name server addresses.
          * <p/>
@@ -50,7 +50,7 @@ public class Producer {
          */
         producer.start();
 
-        for (int i = 0; i < 1000; i++) {
+       // for (int i = 0; i < 1000; i++) {
             try {
 
                 /*
@@ -58,7 +58,7 @@ public class Producer {
                  */
                 Message msg = new Message("SELF_TEST_TOPIC" /* Topic */,
                         "TagA" /* Tag */,
-                        ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+                        ("Hello RocketMQ ").getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
                 );
 
                 /*
@@ -71,7 +71,7 @@ public class Producer {
                 e.printStackTrace();
                 Thread.sleep(1000);
             }
-        }
+      //  }
 
         /*
          * Shut down once the producer instance is not longer in use.
