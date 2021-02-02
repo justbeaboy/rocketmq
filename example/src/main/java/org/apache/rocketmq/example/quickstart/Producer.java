@@ -33,6 +33,7 @@ public class Producer {
          */
         DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
         producer.setNamesrvAddr("127.0.0.1:9876");
+        producer.setRetryTimesWhenSendFailed(2);
         /*
          * Specify name server addresses.
          * <p/>
@@ -50,28 +51,28 @@ public class Producer {
          */
         producer.start();
 
-       // for (int i = 0; i < 1000; i++) {
-            try {
+        // for (int i = 0; i < 1000; i++) {
+        try {
 
-                /*
-                 * Create a message instance, specifying topic, tag and message body.
-                 */
-                Message msg = new Message("SELF_TEST_TOPIC" /* Topic */,
-                        "TagA" /* Tag */,
-                        ("Hello RocketMQ ").getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
-                );
+            /*
+             * Create a message instance, specifying topic, tag and message body.
+             */
+            Message msg = new Message("SELF_TEST_TOPIC",
+                    "TagA",
+                    ("Hello RocketMQ ").getBytes(RemotingHelper.DEFAULT_CHARSET)
+            );
 
-                /*
-                 * Call send message to deliver message to one of brokers.
-                 */
-                SendResult sendResult = producer.send(msg);
+            /*
+             * Call send message to deliver message to one of brokers.
+             */
+            SendResult sendResult = producer.send(msg);
 
-                System.out.printf("%s%n", sendResult);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Thread.sleep(1000);
-            }
-      //  }
+            System.out.printf("%s%n", sendResult);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Thread.sleep(1000);
+        }
+        //  }
 
         /*
          * Shut down once the producer instance is not longer in use.
